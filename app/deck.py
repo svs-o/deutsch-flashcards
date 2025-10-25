@@ -1,16 +1,21 @@
-# TXT parser (skeleton)
+# TXT parser 
 import csv
 from .model import Card
-
-def load_deck(path: str) -> list[Card]:
+def load_deck(path:str):
     cards: list[Card] = []
-    with open(path, 'r', encoding='utf-8') as f:
-        reader = csv.reader(f, delimiter=';', quotechar='"')
-        for idx, row in enumerate(reader, start=1):
-            if not row or all(not c.strip() for c in row):
-                continue
-            if len(row) < 4:
-                raise ValueError(f"Строка {idx}: ожидается 4 поля, получено {len(row)} -> {row}")
-            term, forms, sentence, translation = row[:4]
-            cards.append(Card(term.strip(), forms.strip(), sentence.strip(), translation.strip()))
-    return cards
+    with open(path, 'r', encoding = 'utf-8') as f:
+        reader = csv.reader(f, delimiter = ';', quotechar = '"')
+        for idx, row in enumerate(reader, start = 1):
+            if len(row)<4:
+                raise ValueError(f"Row {idx}: is waiting for 4 fields, recieved {len(row)} -> {row}")
+            term = row[0]
+            forms = row[1]
+            sentanse = row[2]
+            translation = row[3]
+            cards.append(Card(term, forms, sentanse, translation))
+        return cards
+
+
+
+
+

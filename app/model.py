@@ -1,5 +1,4 @@
-# Card model and spaced repetition state (skeleton)
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass
 
 @dataclass
 class Card:

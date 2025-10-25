@@ -1,4 +1,4 @@
-"der Hund";"die Hunde";"Der Hund schläft unter dem Tisch.";"собака"
+"der Hund";"";"Der Hund schläft unter dem Tisch.";"собака"
 "die Stadt";"die Städte";"Ich wohne in einer großen Stadt.";"город"
 "das Buch";"die Bücher";"Das Buch liegt auf dem Tisch.";"книга"
 "die Fremde; die Fremden";"";"Ich spreche nicht gern mit Fremden auf der Straße.";"незнакомец, чужой человек"
