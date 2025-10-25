@@ -1,0 +1,7 @@
+"der Hund";"die Hunde";"Der Hund schläft unter dem Tisch.";"собака"
+"die Stadt";"die Städte";"Ich wohne in einer großen Stadt.";"город"
+"das Buch";"die Bücher";"Das Buch liegt auf dem Tisch.";"книга"
+"die Fremde; die Fremden";"";"Ich spreche nicht gern mit Fremden auf der Straße.";"незнакомец, чужой человек"
+"der Tisch";"die Tische";"Der Tisch ist aus Holz.";"стол"
+"das Mädchen";"die Mädchen";"Das Mädchen lernt Deutsch.";"девочка"
+"der Zug";"die Züge";"Der Zug kommt um 9 Uhr an.";"поезд"
