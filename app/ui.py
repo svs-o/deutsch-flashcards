@@ -1,4 +1,3 @@
-# Minimal Tkinter UI (skeleton)
 import time
 import tkinter as tk
 from tkinter import messagebox, filedialog
@@ -6,49 +5,52 @@ from .deck import load_deck
 from .scheduler import choose_next
 from .model import Card
 
-ART_COLORS = {"die": "#ef4444", "der": "#2563eb", "das": "#22c55e"}
+ART_COLORS = {"die": "#7c0000", "der": "#0034a6", "das": "#00a43c"}
 
-def split_article(term: str):
-    s = term.strip()
-    if not s:
+def split_article(line: str):
+    s = line.strip()
+    if s == None:
         return None, s
-    parts = s.split(maxsplit=1)
-    first = parts[0].lower()
-    if first in ART_COLORS and len(parts) > 1:
-        return first, parts[1]
-    return None, s
+    parts = line.split(None, 1)
+    if parts[0].lower in ART_COLORS and len(parts) > 1:
+        return parts[0].lower, parts[1]
+    else:
+        return None, s 
+
+
 
 class App(tk.Tk):
     def __init__(self, deck_path: str):
         super().__init__()
-        self.title("Deutsch Flashcards — MVP skeleton")
+        self.title("Deutsch Flashcards")
         self.geometry("760x500"); self.configure(bg="#f7f7f9")
         self.deck_path = deck_path
         self.cards = load_deck(deck_path)
         self.current: Card | None = None
         self.show_translation = False
 
-        self.card_frame = tk.Frame(self, bg="white", bd=0, highlightthickness=1, highlightbackground="#cdd1d6")
-        self.card_frame.place(relx=0.5, rely=0.44, anchor="center", width=660, height=310)
+        self.card_frame = tk.Frame(self, bg="white", bd=0, highlightthickness=1, highlightbackground="#000000")
+        self.card_frame.place(relx=0.5, rely=0.4, anchor="center", width=660, height=310)
 
-        top = tk.Frame(self.card_frame, bg="white"); top.pack(pady=(22, 4))
+        top = tk.Frame(self.card_frame, bg="white"); top.pack(pady=(70, 10))
         self.article_label = tk.Label(top, text="", bg="white", font=("Segoe UI", 26, "bold"))
         self.word_label = tk.Label(top, text="", bg="white", font=("Segoe UI", 26, "bold"), wraplength=600, justify="center")
         self.article_label.pack(side="left", padx=(0,8)); self.word_label.pack(side="left")
 
-        self.forms_label = tk.Label(self.card_frame, text="", bg="white", fg="#6b7280", font=("Segoe UI", 12), wraplength=600, justify="center")
-        self.forms_label.pack(pady=(0, 8))
+        self.forms_label = tk.Label(self.card_frame, text="", bg="white", fg="#6b7280", font=("Segoe UI", 15), wraplength=600, justify="center")
+        self.forms_label.pack(pady=(0, 10))
 
-        self.hint_label = tk.Label(self.card_frame, text="", bg="white", fg="#374151", font=("Segoe UI", 14), wraplength=600, justify="center")
+        self.hint_label = tk.Label(self.card_frame, text="", bg="white", fg="#000000", font=("Segoe UI", 20), wraplength=600, justify="center")
         self.hint_label.pack(pady=(0, 8))
 
-        self.translation_label = tk.Label(self.card_frame, text="", bg="white", fg="#111827", font=("Segoe UI", 22), wraplength=600, justify="center")
-        self.translation_label.pack(pady=(6, 10))
+        translation_frame = tk.Frame(self.card_frame, bg="red"); top.pack(pady=(70, 10))
+        self.translation_label = tk.Label(translation_frame, text="", bg="white", fg="#111827", font=("Segoe UI", 26, "bold"), wraplength=600, justify="center")
+        self.translation_label.pack(side="left"); 
 
         btns = tk.Frame(self, bg="#f7f7f9"); btns.pack(side="bottom", pady=18)
-        tk.Button(btns, text="Не знаю (1)", width=16, command=self.on_dont_know).grid(row=0, column=0, padx=8)
-        tk.Button(btns, text="Подсказка (2)", width=16, command=self.on_hint).grid(row=0, column=1, padx=8)
-        tk.Button(btns, text="Знаю (3)", width=16, command=self.on_know).grid(row=0, column=2, padx=8)
+        tk.Button(btns, text="Don't know (1)", width=16, command=self.on_dont_know).grid(row=0, column=0, padx=8)
+        tk.Button(btns, text="Hint (2)", width=16, command=self.on_hint).grid(row=0, column=1, padx=8)
+        tk.Button(btns, text="Know (3)", width=16, command=self.on_know).grid(row=0, column=2, padx=8)
 
         self.bind("<space>", lambda e: self.toggle_translation())
         self.bind("1", lambda e: self.on_dont_know())
@@ -78,7 +80,7 @@ class App(tk.Tk):
 
     def reveal_and_schedule_next(self):
         self.show_translation = True; self.render()
-        self.after(900, self.next_card)
+        self.after(2000, self.next_card)
 
     def on_dont_know(self):
         c = self.current; 

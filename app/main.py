@@ -5,9 +5,9 @@ from tkinter import filedialog, messagebox
 from .ui import App
 
 def main():
-    if len(sys.argv) < 2:
-        root = tk.Tk(); root.withdraw()
-        messagebox.showinfo("Открыть колоду", "Выберите текстовый файл (UTF-8).")
+    if len(sys.argv) < 2:  #no path to the file 
+        root = tk.Tk(); root.withdraw() 
+        messagebox.showinfo("Open a set", "Choose a txt file")
         path = filedialog.askopenfilename(filetypes=[("Text files","*.txt"),("All files","*.*")])
         if not path:
             return
@@ -17,5 +17,6 @@ def main():
         deck_path = sys.argv[1]
     App(deck_path).mainloop()
 
+# Run the app only if this file is executed directly, not when imported as a modul
 if __name__ == "__main__":
     main()

@@ -8,7 +8,7 @@
     { "name": "Run Flashcards (demo)",
       "type": "debugpy",
       "request": "launch",
-      "module": "app.main",              // <-- запускаем КАК МОДУЛЬ!
+      "module": "app.main",             
       "args": ["data/demo_deck.txt"],
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
